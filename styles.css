@@ -27,3 +27,6 @@ body{
     flex-direction: column;
 }
 
+#buttonsMenu{
+    padding-bottom: 10px;
+}

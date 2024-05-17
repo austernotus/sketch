@@ -1,7 +1,9 @@
 const container = document.getElementById("container")
 const sizeButton = document.getElementById("sizeButton")
+const randomColorButton = document.getElementById("randomColorButton")
+const resetButton = document.getElementById("resetButton")
 
-
+let randomColor = false
 
 function askSize(){
 
@@ -30,14 +32,46 @@ function changeSize(size){
         let newDiv = document.createElement("div")
         newDiv.setAttribute("class", "square")
         newDiv.style.flexBasis = 100/size + "%"
-        newDiv.addEventListener("mouseover", () => newDiv.style.backgroundColor = "white")
+        newDiv.addEventListener("mouseover", () => paint(newDiv))
         container.appendChild(newDiv);
     }
 }
 
 changeSize(20)
 
+function paint(newDiv){
+
+    if (randomColor === false){
+        newDiv.style.backgroundColor = "white"
+    }
+    else{
+        newDiv.style.backgroundColor = generateRandomColor()
+    }
+}
+
+
+function generateRandomColor(){
+    r = Math.floor(Math.random() * 255);
+    g = Math.floor(Math.random() * 255);
+    b = Math.floor(Math.random() * 255);
+
+    return newColor = "rgb(" + r + "," + g + "," + b +")";
+}
+
+function toggleColor(){
+    randomColor = !randomColor
+
+    if(randomColor){
+        randomColorButton.style.backgroundColor = "lightsalmon"
+    }
+    else{
+        randomColorButton.style.backgroundColor = "revert"
+    }
+
+}
 
 sizeButton.addEventListener("click", () => askSize())
+randomColorButton.addEventListener("click", () => toggleColor())
+resetButton.addEventListener("click", () => changeSize(20))
 
 console.log(container)
