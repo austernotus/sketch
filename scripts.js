@@ -2,6 +2,7 @@ const container = document.getElementById("container")
 const sizeButton = document.getElementById("sizeButton")
 const randomColorButton = document.getElementById("randomColorButton")
 const resetButton = document.getElementById("resetButton")
+const randomDrawingButton = document.getElementById("randomDrawingButton")
 
 let randomColor = false
 
@@ -40,7 +41,6 @@ function changeSize(size){
 changeSize(20)
 
 function paint(newDiv){
-
     if (randomColor === false){
         newDiv.style.backgroundColor = "white"
     }
@@ -70,8 +70,24 @@ function toggleColor(){
 
 }
 
+function randomDrawing(){
+
+    for (const node of container.childNodes){
+        if (randomColor){
+            node.style.backgroundColor = generateRandomColor()
+        }
+        else{
+            colorSelection = ["white", "black"]
+            node.style.backgroundColor = colorSelection[Math.floor(Math.random() * 2)]
+        }
+
+    }
+}
+
+
 sizeButton.addEventListener("click", () => askSize())
 randomColorButton.addEventListener("click", () => toggleColor())
 resetButton.addEventListener("click", () => changeSize(20))
+randomDrawingButton.addEventListener("click", () => randomDrawing())
 
 console.log(container)
